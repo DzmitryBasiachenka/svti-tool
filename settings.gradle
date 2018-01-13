@@ -1,0 +1,3 @@
+rootProject.name='svti-tool'
+
+include 'svtit-app'
