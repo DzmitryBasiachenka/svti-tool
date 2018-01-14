@@ -1,6 +1,7 @@
-package main.java.com.bsdim.svtit.domain.video;
+package com.bsdim.svtit.domain.video;
 
-public class VideoSystem {
+public class Video {
+    private String id;
     private String nameObject;
     private String dateOfFoundation;
     private String modelOfVideoRecorder;
@@ -14,6 +15,14 @@ public class VideoSystem {
     private String ipOfCameras;
     private String loginOfCameras;
     private String passwordOfCameras;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getNameObject() {
         return nameObject;
@@ -121,7 +130,10 @@ public class VideoSystem {
 
     @Override
     public String toString() {
-        return new StringBuilder("Название объекта: ")
+        return new StringBuilder("id :")
+                .append(getId())
+                .append("\n")
+                .append("Название объекта: ")
                 .append(getNameObject())
                 .append("\n")
                 .append("Дата ввода в эксплуатацию: ")

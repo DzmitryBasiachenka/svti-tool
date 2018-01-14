@@ -1,6 +1,6 @@
 apply plugin: 'application'
 
-mainClassName = "com.bsdim.svtit.app.AppStarter"
+mainClassName = "com.bsdim.svtit.admin.AdminStarter"
 
 dependencies {
     compile project(":svtit-service")
