@@ -6,4 +6,8 @@ subprojects {
 repositories {
   jcenter()
  }
+
+dependencies {
+    compile group: 'org.codehaus.plexus', name: 'plexus-utils', version: '3.0.22'
+ }
 }

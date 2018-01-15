@@ -1,13 +1,13 @@
 package com.bsdim.svtit.domain.video;
 
-public class Video {
+public class VideoSystem {
     private String id;
     private String nameObject;
     private String dateOfFoundation;
     private String modelOfVideoRecorder;
     private String ipOfVideoRecorder;
-    private String archiveSummer;
-    private String archiveWinter;
+    private String summerArchive;
+    private String winterArchive;
     private String loginOfVideoRecorder;
     private String passwordOfVideoRecorder;
     private String countOfCameras;
@@ -56,20 +56,20 @@ public class Video {
         this.ipOfVideoRecorder = ipOfVideoRecorder;
     }
 
-    public String getArchiveSummer() {
-        return archiveSummer;
+    public String getSummerArchive() {
+        return summerArchive;
     }
 
-    public void setArchiveSummer(String archiveSummer) {
-        this.archiveSummer = archiveSummer;
+    public void setSummerArchive(String summerArchive) {
+        this.summerArchive = summerArchive;
     }
 
-    public String getArchiveWinter() {
-        return archiveWinter;
+    public String getWinterArchive() {
+        return winterArchive;
     }
 
-    public void setArchiveWinter(String archiveWinter) {
-        this.archiveWinter = archiveWinter;
+    public void setWinterArchive(String winterArchive) {
+        this.winterArchive = winterArchive;
     }
 
     public String getLoginOfVideoRecorder() {
@@ -146,10 +146,10 @@ public class Video {
                 .append(getIpOfVideoRecorder())
                 .append("\n")
                 .append("Архив лето: ")
-                .append(getArchiveSummer())
+                .append(getSummerArchive())
                 .append("\n")
                 .append("Архив зима: ")
-                .append(getArchiveWinter())
+                .append(getWinterArchive())
                 .append("\n")
                 .append("Логин видеорегистратора: ")
                 .append(getLoginOfVideoRecorder())
