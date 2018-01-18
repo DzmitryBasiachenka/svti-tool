@@ -1,5 +1,7 @@
 package com.bsdim.svtit.service.video;
 
+import java.util.List;
+
 import com.bsdim.svtit.domain.video.VideoSystem;
 import com.bsdim.svtit.repository.video.VideoSystemRepository;
 
@@ -20,5 +22,9 @@ public class VideoSystemService {
 
     public void delete(String name) {
         repository.delete(name);
+    }
+
+    public List<VideoSystem> getVideoSystems() {
+        return repository.getVideoSystems();
     }
 }

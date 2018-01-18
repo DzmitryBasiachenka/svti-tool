@@ -1,6 +1,8 @@
 package com.bsdim.svtit.domain.video;
 
-public class VideoSystem {
+import java.io.Serializable;
+
+public class VideoSystem implements Serializable {
     private String id;
     private String nameObject;
     private String dateOfFoundation;

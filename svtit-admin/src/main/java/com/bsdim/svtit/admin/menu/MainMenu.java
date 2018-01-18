@@ -1,8 +1,10 @@
 package com.bsdim.svtit.admin.menu;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.bsdim.svtit.admin.util.InputUtil;
+import com.bsdim.svtit.domain.video.VideoSystem;
 import com.bsdim.svtit.service.video.VideoSystemService;
 
 public class MainMenu {
@@ -18,15 +20,12 @@ public class MainMenu {
     private static final String UPDATE_VIDEO_SYSTEM = "Update video system";
     private static final String DELETE_VIDEO_SYSTEM = "Delete video system";
     private static final String DISPLAY_VIDEO_SYSTEMS = "Display all video systems";
+    private static final String ENTER_NAME = "Enter name of object";
     private static final String GOODBYE = "Goodbye";
     private static final String CHOOSE_AGAIN = "Choose again";
     private static Logger sLogger = Logger.getLogger(MainMenu.class.getName());
     private VideoSystemService service = new VideoSystemService();
 
-    /**
-     * Selects item of the main menu.
-     */
-    @SuppressWarnings("checkstyle:CyclomaticComplexity")
     public void selectMenu() {
         AbstractMenu userMenu = new VideoSystemMenu();
 
@@ -37,41 +36,41 @@ public class MainMenu {
                     sLogger.info(ADD_VIDEO_SYSTEM);
                     service.addVideoSystem(InputUtil.createDataVideoSystem());
                     break;
-               /* case CASE_TWO:
+                case CASE_TWO:
                     sLogger.info(SEARCH_VIDEO_SYSTEM_BY_NAME);
-                    User user = service.findById(InputUtil.inputData(ENTER_ID));
-                    if (user != null) {
-                        sLogger.info(user.toString());
+                    VideoSystem videoSystem = service.findByName(InputUtil.inputData(ENTER_NAME));
+                    if (videoSystem != null) {
+                        sLogger.info(videoSystem.toString());
                     } else {
-                        sLogger.info(USER_NOT_FOUND);
+                        sLogger.info(VIDEO_SYSTEM_NOT_FOUND);
                     }
                     break;
                 case CASE_THREE:
                     sLogger.info(UPDATE_VIDEO_SYSTEM);
-                    user = service.findById(InputUtil.inputData(ENTER_ID));
-                    if (user != null) {
-                        service.updateUser(InputUtil.updateDataVideoSystem(user));
+                    videoSystem = service.findByName(InputUtil.inputData(ENTER_NAME));
+                    if (videoSystem != null) {
+                        service.updateVideoSystem(InputUtil.updateDataVideoSystem(videoSystem));
                     } else {
-                        sLogger.info(USER_NOT_FOUND);
+                        sLogger.info(VIDEO_SYSTEM_NOT_FOUND);
                     }
                     break;
                 case CASE_FOUR:
                     sLogger.info(DELETE_VIDEO_SYSTEM);
-                    String userId = InputUtil.inputData(ENTER_ID);
-                    user = service.findById(userId);
-                    if (user != null) {
-                        service.deleteUser(userId);
+                    String videoSystemName = InputUtil.inputData(ENTER_NAME);
+                    videoSystem = service.findByName(videoSystemName);
+                    if (videoSystem != null) {
+                        service.delete(videoSystemName);
                     } else {
-                        sLogger.info(USER_NOT_FOUND);
+                        sLogger.info(VIDEO_SYSTEM_NOT_FOUND);
                     }
                     break;
                 case CASE_FIVE:
                     sLogger.info(DISPLAY_VIDEO_SYSTEMS);
-                    List<User> users = service.getUsers();
-                    for (User info : users) {
-                        sLogger.info(info.toString());
+                    List<VideoSystem> list = service.getVideoSystems();
+                    for (VideoSystem data : list) {
+                        sLogger.info(data.toString());
                     }
-                    break;*/
+                    break;
                 case CASE_SIX:
                     sLogger.info(GOODBYE);
                     System.exit(0);

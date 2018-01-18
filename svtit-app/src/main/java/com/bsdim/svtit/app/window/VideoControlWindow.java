@@ -5,21 +5,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import javax.swing.JLabel;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import java.util.UUID;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import com.bsdim.svtit.app.video.VideoSystemFacade;
+import com.bsdim.svtit.domain.video.VideoSystem;
+import com.bsdim.svtit.service.video.VideoSystemService;
+import org.codehaus.plexus.util.StringUtils;
 
 public class VideoControlWindow extends JFrame {
     private static final String VIDEO_CONTROL = "Система видеонаблюдения";
     private static final String DATA_BORDER = "Данные";
     private static final String NAME_OBJECT = "Название объекта: ";
     private static final String DATE = "Дата ввода в эксплуатацию: ";
-    private static final String DATE_EXAMPLE = "пример: 01.12.2017";
+    private static final String DATE_EXAMPLE = "пример: 31.12.2017";
     private static final String EMPTY = "";
     private static final String MODEL_OF_VIDEO_RECORDER = "Модель видеорегистратора: ";
     private static final String IP_OF_VIDEO_RECORDER = "IPv4-адрес видеорегистратора: ";
@@ -43,8 +44,8 @@ public class VideoControlWindow extends JFrame {
     private JTextField nameField;
     private JTextField dateField;
     private JTextField videoRecorderField;
-    private JTextField archiveSummerField;
-    private JTextField archiveWinterField;
+    private JTextField summerArchiveField;
+    private JTextField winterArchiveField;
     private JTextField ipOfVideoRecorderField;
     private JTextField loginOfVideoRecorderField;
     private JTextField passwordOfVideoRecorderField;
@@ -53,6 +54,7 @@ public class VideoControlWindow extends JFrame {
     private JTextField ipOfCamerasField;
     private JTextField loginOfCamerasField;
     private JTextField passwordOfCamerasField;
+    private VideoSystemService service = new VideoSystemService();
 
     public VideoControlWindow() {
         super(VIDEO_CONTROL);
@@ -72,25 +74,36 @@ public class VideoControlWindow extends JFrame {
         mainBox = Box.createVerticalBox();
         mainBox.setBorder(new EmptyBorder(10, 10, 5, 10));
 
-        fillMainBox(initNameComponent(), 20);
-        fillMainBox(initDateComponent(), 20);
-        fillMainBox(initVideoRecorderComponent(),20);
-        fillMainBox(initIpOfVideoRecorderComponent(), 20);
-        fillMainBox(initArhiveComponent(), 20);
-        fillMainBox(initLoginOfVideoRecorderComponent(), 20);
-        fillMainBox(initPasswordOfVideoRecorderComponent(), 20);
-        fillMainBox(initCountOfCamerasComponent(), 20);
-        fillMainBox(initModelsOfCamerasComponent(), 20);
-        fillMainBox(initIpOfCamerasComponent(), 20);
-        fillMainBox(initLoginOfCamerasComponent(), 20);
-        fillMainBox(initPasswordOfCamerasComponent(), 10);
-        fillMainBox(initButtonComponent(), 1);
+        addMainBox(initNameComponent(), 20);
+        addMainBox(initDateComponent(), 20);
+        addMainBox(initVideoRecorderComponent(),20);
+        addMainBox(initIpOfVideoRecorderComponent(), 20);
+        addMainBox(initArhiveComponent(), 20);
+        addMainBox(initLoginOfVideoRecorderComponent(), 20);
+        addMainBox(initPasswordOfVideoRecorderComponent(), 20);
+        addMainBox(initCountOfCamerasComponent(), 20);
+        addMainBox(initModelsOfCamerasComponent(), 20);
+        addMainBox(initIpOfCamerasComponent(), 20);
+        addMainBox(initLoginOfCamerasComponent(), 20);
+        addMainBox(initPasswordOfCamerasComponent(), 10);
+        addMainBox(initButtonComponent(), 1);
 
         mainPanel.add(mainBox);
         return mainPanel;
     }
 
-    private void fillMainBox(Box box, int height) {
+    /*private Box initComponent(String nameLabel, JTextField textField, int width) {
+        Box box = Box.createHorizontalBox();
+        JLabel label = new JLabel(nameLabel);
+        textField = initTextField();
+
+        box.add(label);
+        box.add(Box.createHorizontalStrut(width));
+        box.add(textField);
+        return box;
+    }*/
+
+    private void addMainBox(Box box, int height) {
         mainBox.add(box);
         mainBox.add(Box.createVerticalStrut(height));
     }
@@ -110,20 +123,7 @@ public class VideoControlWindow extends JFrame {
         Box dateBox = Box.createHorizontalBox();
         JLabel nameLabel = new JLabel(DATE);
         dateField = initTextField();
-
         dateField.setToolTipText(DATE_EXAMPLE);
-        dateField.setText(DATE_EXAMPLE);
-        dateField.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                dateField.setText(EMPTY);
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                dateField.setText(DATE_EXAMPLE);
-            }
-        });
 
         dateBox.add(nameLabel);
         dateBox.add(Box.createHorizontalStrut(18));
@@ -161,19 +161,19 @@ public class VideoControlWindow extends JFrame {
         JLabel summerLabel = new JLabel(ARCHIVE_SUMMER);
         JLabel winterLabel = new JLabel(ARCHIVE_WINTER);
 
-        archiveSummerField = initTextField();
-        archiveWinterField = initTextField();
+        summerArchiveField = initTextField();
+        winterArchiveField = initTextField();
 
-        archiveSummerField.setToolTipText(ARCHIVE_EXAMPLE);
-        archiveWinterField.setToolTipText(ARCHIVE_EXAMPLE);
+        summerArchiveField.setToolTipText(ARCHIVE_EXAMPLE);
+        winterArchiveField.setToolTipText(ARCHIVE_EXAMPLE);
 
         archiveMainBox.add(archiveLabel);
         archiveMainBox.add(Box.createVerticalStrut(10));
         archiveBox.add(summerLabel);
-        archiveBox.add(archiveSummerField);
+        archiveBox.add(summerArchiveField);
         archiveBox.add(Box.createHorizontalStrut(80));
         archiveBox.add(winterLabel);
-        archiveBox.add(archiveWinterField);
+        archiveBox.add(winterArchiveField);
         archiveMainBox.add(archiveBox);
         return archiveMainBox;
     }
@@ -258,6 +258,26 @@ public class VideoControlWindow extends JFrame {
     private Box initButtonComponent() {
         Box buttonBox = Box.createHorizontalBox();
         JButton save = new JButton(SAVE_BUTTON);
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VideoSystemFacade facade = new VideoSystemFacade();
+                if (StringUtils.isBlank(nameField.getText())) {
+                    JOptionPane.showMessageDialog(null,
+                            String.format("Поле \"Название объекта\" заполнено некорректно"));
+                } else {
+                    VideoSystem videoSystem = facade.findByName(nameField.getText());
+                    if (videoSystem == null) {
+                        saveVideoSystem();
+                        JOptionPane.showMessageDialog(null, String.format("Сохранено"));
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null,
+                                String.format("Объект %1$s уже существует", nameField.getText()));
+                    }
+                }
+            }
+        });
         JButton cancel = new JButton(CANCEL_BUTTON);
         cancel.addActionListener(new ActionListener() {
             @Override
@@ -277,5 +297,26 @@ public class VideoControlWindow extends JFrame {
         JTextField text = new JTextField();
         text.setEditable(true);
         return text;
+    }
+
+    private void saveVideoSystem() {
+        VideoSystem videoSystem = new VideoSystem();
+
+        videoSystem.setId(UUID.randomUUID().toString());
+        videoSystem.setNameObject(nameField.getText());
+        videoSystem.setDateOfFoundation(dateField.getText());
+        videoSystem.setModelOfVideoRecorder(videoRecorderField.getText());
+        videoSystem.setSummerArchive(summerArchiveField.getText());
+        videoSystem.setWinterArchive(winterArchiveField.getText());
+        videoSystem.setIpOfVideoRecorder(ipOfVideoRecorderField.getText());
+        videoSystem.setLoginOfVideoRecorder(loginOfVideoRecorderField.getText());
+        videoSystem.setPasswordOfVideoRecorder(passwordOfVideoRecorderField.getText());
+        videoSystem.setCountOfCameras(countOfCamerasField.getText());
+        videoSystem.setModelsOfCameras(modelsOfCamerasField.getText());
+        videoSystem.setIpOfCameras(ipOfCamerasField.getText());
+        videoSystem.setLoginOfCameras(loginOfCamerasField.getText());
+        videoSystem.setPasswordOfCameras(passwordOfCamerasField.getText());
+
+        service.addVideoSystem(videoSystem);
     }
 }

@@ -14,24 +14,50 @@ public class VideoSystemRepository extends FileRepositoryAbstract<VideoSystem> i
     }
 
     @Override
-    public void create(VideoSystem entity) {
+    public void create(VideoSystem videoSystem) {
         List<VideoSystem> list = readData();
-        list.add(entity);
+        list.add(videoSystem);
         writeData(list);
     }
 
     @Override
-    public VideoSystem read(String key) {
+    public VideoSystem read(String name) {
+        List<VideoSystem> list = readData();
+        for (VideoSystem videoSystem: list) {
+            if (videoSystem.getNameObject().equals(name)) {
+                return videoSystem;
+            }
+        }
         return null;
     }
 
     @Override
-    public void update(VideoSystem entity) {
-
+    public void update(VideoSystem videoSystem) {
+        List<VideoSystem> list = readData();
+        for (int i = 0; i < list.size(); i++) {
+            VideoSystem videoSystemName = list.get(i);
+            if (videoSystemName.getNameObject().equals(videoSystem.getNameObject())) {
+                list.set(i, videoSystem);
+                break;
+            }
+        }
+        writeData(list);
     }
 
     @Override
-    public void delete(String key) {
+    public void delete(String name) {
+        List<VideoSystem> list = readData();
+        for (int i = 0; i < list.size(); i++) {
+            VideoSystem videoSystem = list.get(i);
+            if (videoSystem.getNameObject().equals(name)) {
+                list.remove(i);
+                break;
+            }
+        }
+        writeData(list);
+    }
 
+    public List<VideoSystem> getVideoSystems() {
+        return readData();
     }
 }

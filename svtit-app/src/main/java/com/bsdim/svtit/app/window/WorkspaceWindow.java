@@ -4,18 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JTextArea;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import com.bsdim.svtit.app.component.MenuBar;
+import com.bsdim.svtit.domain.video.VideoSystem;
 
 public class WorkspaceWindow extends JFrame {
     private static final String WORKSPACE_WINDOW = "Рабочая область";
@@ -44,7 +40,7 @@ public class WorkspaceWindow extends JFrame {
         panel.setBorder(new TitledBorder(VIDEO_CONTROL));
 
         panel.add(initButtonComponent(), BorderLayout.SOUTH);
-        panel.add(initStationComponent(), BorderLayout.WEST);
+        panel.add(initListComponent(), BorderLayout.WEST);
         panel.add(initInfoComponent(), BorderLayout.EAST);
 
         return panel;
@@ -80,7 +76,7 @@ public class WorkspaceWindow extends JFrame {
     }
 
     //provisionally
-    private JPanel initStationComponent() {
+    private JPanel initListComponent() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(new TitledBorder(LIST_UNITS));
         JTextArea station = new JTextArea(0, 20);

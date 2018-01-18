@@ -26,7 +26,7 @@ public final class InputUtil {
     }
 
     public static VideoSystem createDataVideoSystem() {
-        VideoSystem video = new VideoSystem();
+        VideoSystem videoSystem = new VideoSystem();
 
         String name = inputData("Enter name of the video system: ");
         String dateOfFoundation = inputData("Enter date of foundation of the video system: ");
@@ -42,22 +42,22 @@ public final class InputUtil {
         String loginOfCameras = inputData("Enter login of the the cameras: ");
         String passwordOfCameras = inputData("Enter password of the cameras: ");
 
-        video.setId(UUID.randomUUID().toString());
-        video.setNameObject(name);
-        video.setDateOfFoundation(dateOfFoundation);
-        video.setModelOfVideoRecorder(modelOfVideoRecorder);
-        video.setIpOfVideoRecorder(ipOfVideoRecorder);
-        video.setSummerArchive(summerArchive);
-        video.setWinterArchive(winterArchive);
-        video.setLoginOfVideoRecorder(loginOfVideoRecorder);
-        video.setPasswordOfVideoRecorder(passwordOfVideoRecorder);
-        video.setCountOfCameras(countOfCameras);
-        video.setModelsOfCameras(modelsOfCameras);
-        video.setIpOfCameras(ipOfCameras);
-        video.setLoginOfCameras(loginOfCameras);
-        video.setPasswordOfCameras(passwordOfCameras);
+        videoSystem.setId(UUID.randomUUID().toString());
+        videoSystem.setNameObject(name);
+        videoSystem.setDateOfFoundation(dateOfFoundation);
+        videoSystem.setModelOfVideoRecorder(modelOfVideoRecorder);
+        videoSystem.setIpOfVideoRecorder(ipOfVideoRecorder);
+        videoSystem.setSummerArchive(summerArchive);
+        videoSystem.setWinterArchive(winterArchive);
+        videoSystem.setLoginOfVideoRecorder(loginOfVideoRecorder);
+        videoSystem.setPasswordOfVideoRecorder(passwordOfVideoRecorder);
+        videoSystem.setCountOfCameras(countOfCameras);
+        videoSystem.setModelsOfCameras(modelsOfCameras);
+        videoSystem.setIpOfCameras(ipOfCameras);
+        videoSystem.setLoginOfCameras(loginOfCameras);
+        videoSystem.setPasswordOfCameras(passwordOfCameras);
 
-        return video;
+        return videoSystem;
     }
 
     public static VideoSystem updateDataVideoSystem(VideoSystem video) {
