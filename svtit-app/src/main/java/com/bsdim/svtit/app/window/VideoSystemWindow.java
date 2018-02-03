@@ -3,8 +3,6 @@ package com.bsdim.svtit.app.window;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.util.UUID;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -15,13 +13,12 @@ import com.bsdim.svtit.domain.video.VideoSystem;
 import com.bsdim.svtit.service.video.VideoSystemService;
 import org.codehaus.plexus.util.StringUtils;
 
-public class VideoControlWindow extends JFrame {
-    private static final String VIDEO_CONTROL = "Система видеонаблюдения";
+public class VideoSystemWindow extends JFrame {
+    private static final String VIDEO_SYSTEM = "Система видеонаблюдения";
     private static final String DATA_BORDER = "Данные";
     private static final String NAME_OBJECT = "Название объекта: ";
     private static final String DATE = "Дата ввода в эксплуатацию: ";
     private static final String DATE_EXAMPLE = "пример: 31.12.2017";
-    private static final String EMPTY = "";
     private static final String MODEL_OF_VIDEO_RECORDER = "Модель видеорегистратора: ";
     private static final String IP_OF_VIDEO_RECORDER = "IPv4-адрес видеорегистратора: ";
     private static final String ARCHIVE = "Архив(количество дней, хранимой информации)";
@@ -56,8 +53,8 @@ public class VideoControlWindow extends JFrame {
     private JTextField passwordOfCamerasField;
     private VideoSystemService service = new VideoSystemService();
 
-    public VideoControlWindow() {
-        super(VIDEO_CONTROL);
+    public VideoSystemWindow() {
+        super(VIDEO_SYSTEM);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
         setSize(WIDTH, HEIGHT);

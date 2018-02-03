@@ -8,7 +8,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import com.bsdim.svtit.app.window.EditorWindow;
-import com.bsdim.svtit.app.window.VideoControlWindow;
+import com.bsdim.svtit.app.window.VideoSystemWindow;
 
 public class MenuBar {
     private static final String FILE_MENU = "Файл";
@@ -35,7 +35,7 @@ public class MenuBar {
         newItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new VideoControlWindow();
+                new VideoSystemWindow();
             }
         });
 
