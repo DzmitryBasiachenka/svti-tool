@@ -21,7 +21,7 @@ public class WorkspaceWindow extends JFrame {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
 
-    private JList<VideoSystem> nameList = new JList<>();
+    private JList<VideoSystem> listNames = new JList<>();
     private VideoSystemFacade facade = new VideoSystemFacade();
     private JTextArea info;
 
@@ -86,7 +86,7 @@ public class WorkspaceWindow extends JFrame {
     private JPanel initInfoComponent() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(new TitledBorder(INFORMATION));
-        info = new JTextArea(0, 48);
+        info = new JTextArea(0, 50);
         info.setLineWrap(true);
         info.setEditable(true);
         panel.add(wrapForScroll(info), BorderLayout.CENTER);
@@ -94,9 +94,9 @@ public class WorkspaceWindow extends JFrame {
     }
 
     public JComponent initListComponent() {
-        nameList.setPreferredSize(new Dimension(230, 0));
+        //listNames.setPreferredSize(new Dimension(230, 0));
         refreshData();
-        nameList.addListSelectionListener(e -> {
+        listNames.addListSelectionListener(e -> {
             JList<VideoSystem> list = (JList<VideoSystem>) e.getSource();
             VideoSystem videoSystem = list.getSelectedValue();
             if (videoSystem != null) {
@@ -106,8 +106,8 @@ public class WorkspaceWindow extends JFrame {
         });
         JPanel listPanel = new JPanel(new BorderLayout());
         listPanel.setBorder(new TitledBorder(LIST_VIDEO_SYSTEMS));
-        //listPanel.setPreferredSize(new Dimension(50, 50));
-        listPanel.add(wrapForScroll(nameList), BorderLayout.CENTER);
+        listPanel.setPreferredSize(new Dimension(220, 0));
+        listPanel.add(wrapForScroll(listNames), BorderLayout.CENTER);
         return listPanel;
     }
 
@@ -117,8 +117,8 @@ public class WorkspaceWindow extends JFrame {
         for (VideoSystem videoSystem: videoSystems) {
             listModel.addElement(videoSystem);
         }
-        nameList.setModel(listModel);
-        nameList.setCellRenderer(new VideoSystemCellRenderer());
+        listNames.setModel(listModel);
+        listNames.setCellRenderer(new VideoSystemCellRenderer());
         info.setText("");
     }
 
@@ -130,6 +130,7 @@ public class WorkspaceWindow extends JFrame {
                                                       boolean isSelected, boolean cellHasFocus) {
             VideoSystem videoSystem = (VideoSystem) value;
             setText(videoSystem.getNameObject());
+            setToolTipText(videoSystem.getNameObject());
             if (isSelected) {
                 setBackground(Color.lightGray);
                 setForeground(Color.black);
@@ -144,6 +145,7 @@ public class WorkspaceWindow extends JFrame {
     public static JComponent wrapForScroll(JComponent component) {
         JScrollPane scrollPane = new JScrollPane(component);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         return scrollPane;
     }
 }

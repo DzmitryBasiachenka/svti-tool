@@ -10,7 +10,7 @@ import com.bsdim.svtit.repository.file.FileRepositoryAbstract;
 public class VideoSystemRepository extends FileRepositoryAbstract<VideoSystem> implements ICrud<String, VideoSystem> {
 
     public VideoSystemRepository() {
-        super("video-system.dat");
+        super("videoSystem.dat");
     }
 
     @Override

@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import com.bsdim.svtit.app.LengthRestrictedDocument;
 import com.bsdim.svtit.app.video.VideoSystemFacade;
 import com.bsdim.svtit.domain.video.VideoSystem;
 import com.bsdim.svtit.service.video.VideoSystemService;
@@ -109,6 +110,7 @@ public class VideoSystemWindow extends JFrame {
         Box nameBox = Box.createHorizontalBox();
         JLabel nameLabel = new JLabel(NAME_OBJECT);
         nameField = initTextField();
+        nameField.setDocument(new LengthRestrictedDocument(64));
 
         nameBox.add(nameLabel);
         nameBox.add(Box.createHorizontalStrut(75));
