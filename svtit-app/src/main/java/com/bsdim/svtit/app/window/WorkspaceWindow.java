@@ -16,7 +16,9 @@ public class WorkspaceWindow extends JFrame {
     private static final String VIDEO_CONTROL = "Видеонаблюдение";
     private static final String EXIT_BUTTON = "Выход";
     private static final String CREATE_BUTTON = "Добавить";
-    private static final String LIST_VIDEO_SYSTEMS = "Список видео систем";
+    private static final String EDIT_BUTTON = "Редактировать";
+    private static final String DELETE_BUTTON = "Удалить";
+    private static final String STATION = "Станция";
     private static final String INFORMATION = "Информация";
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
@@ -24,6 +26,9 @@ public class WorkspaceWindow extends JFrame {
     private JList<VideoSystem> listNames = new JList<>();
     private VideoSystemFacade facade = new VideoSystemFacade();
     private JTextArea info;
+    private VideoSystem videoSystem;
+    private ActionListener editActionListener;
+    private ActionListener deleteActionListener;
 
     public WorkspaceWindow() {
         super(WORKSPACE_WINDOW);
@@ -31,7 +36,6 @@ public class WorkspaceWindow extends JFrame {
         setResizable(false);
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
-        setJMenuBar(new MenuBar().initMenuBarComponent());
 
         add(initComponents());
         setVisible(true);
@@ -45,6 +49,8 @@ public class WorkspaceWindow extends JFrame {
         panel.add(initInfoComponent(), BorderLayout.EAST);
         panel.add(initListComponent(), BorderLayout.WEST);
 
+        setJMenuBar(new MenuBar().initMenuBarComponent(editActionListener, deleteActionListener));
+
         return panel;
     }
 
@@ -56,8 +62,8 @@ public class WorkspaceWindow extends JFrame {
         create.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame videoControlWindow = new VideoSystemWindow();
-                videoControlWindow.addWindowListener(new WindowAdapter() {
+                VideoSystemWindow videoSystemWindow = new VideoSystemWindow();
+                videoSystemWindow.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
                         refreshData();
@@ -65,6 +71,43 @@ public class WorkspaceWindow extends JFrame {
                 });
             }
         });
+
+        JButton edit = new JButton(EDIT_BUTTON);
+        editActionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (videoSystem != null) {
+                    EditorWindow editorWindow = new EditorWindow(videoSystem);
+                    editorWindow.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                            refreshData();
+                        }
+                    });
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            String.format("Выберите станцию для редактирования"));
+                }
+            }
+        };
+        edit.addActionListener(editActionListener);
+
+        JButton delete = new JButton(DELETE_BUTTON);
+        deleteActionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (videoSystem != null) {
+                    facade.deleteVideoSystem(videoSystem.getNameStation());
+                    JOptionPane.showMessageDialog(null,
+                            String.format("Удалено"));
+                    refreshData();
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            String.format("Выберите станцию для удаления"));
+                }
+            }
+        };
+        delete.addActionListener(deleteActionListener);
 
         JButton exit = new JButton(EXIT_BUTTON);
         exit.addActionListener(new ActionListener() {
@@ -76,8 +119,9 @@ public class WorkspaceWindow extends JFrame {
 
         buttonPanel.add(new JLabel());
         buttonPanel.add(new JLabel());
-        buttonPanel.add(new JLabel());
         buttonPanel.add(create);
+        buttonPanel.add(edit);
+        buttonPanel.add(delete);
         buttonPanel.add(exit);
 
         return buttonPanel;
@@ -98,14 +142,14 @@ public class WorkspaceWindow extends JFrame {
         refreshData();
         listNames.addListSelectionListener(e -> {
             JList<VideoSystem> list = (JList<VideoSystem>) e.getSource();
-            VideoSystem videoSystem = list.getSelectedValue();
+            videoSystem = list.getSelectedValue();
             if (videoSystem != null) {
                 info.setText(videoSystem.toString());
                 info.setCaretPosition(0);
             }
         });
         JPanel listPanel = new JPanel(new BorderLayout());
-        listPanel.setBorder(new TitledBorder(LIST_VIDEO_SYSTEMS));
+        listPanel.setBorder(new TitledBorder(STATION));
         listPanel.setPreferredSize(new Dimension(220, 0));
         listPanel.add(wrapForScroll(listNames), BorderLayout.CENTER);
         return listPanel;
@@ -129,8 +173,8 @@ public class WorkspaceWindow extends JFrame {
         public Component getListCellRendererComponent(JList list, Object value, int index,
                                                       boolean isSelected, boolean cellHasFocus) {
             VideoSystem videoSystem = (VideoSystem) value;
-            setText(videoSystem.getNameObject());
-            setToolTipText(videoSystem.getNameObject());
+            setText(videoSystem.getNameStation());
+            setToolTipText(videoSystem.getNameStation());
             if (isSelected) {
                 setBackground(Color.lightGray);
                 setForeground(Color.black);

@@ -19,7 +19,13 @@ public class MenuBar {
     private static final String HELP_MENU = "Помощь";
     private static final String ABOUT_ITEM = "О программме";
 
-    public JMenuBar initMenuBarComponent() {
+    private ActionListener editActionListener;
+    private ActionListener deleteActionListener;
+
+    public JMenuBar initMenuBarComponent(ActionListener editActionListener, ActionListener deleteActionListener) {
+        this.editActionListener = editActionListener;
+        this.deleteActionListener = deleteActionListener;
+
         JMenuBar menuBar = new JMenuBar();
 
         menuBar.add(initFileMenu());
@@ -40,15 +46,12 @@ public class MenuBar {
         });
 
         JMenuItem editItem = new JMenuItem(EDIT_ITEM);
-        editItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new EditorWindow();
-            }
-        });
-        JMenuItem deleteItem = new JMenuItem(DELETE_ITEM);
-        JMenuItem exitItem = new JMenuItem(EXIT_ITEM);
+        editItem.addActionListener(editActionListener);
 
+        JMenuItem deleteItem = new JMenuItem(DELETE_ITEM);
+        deleteItem.addActionListener(deleteActionListener);
+
+        JMenuItem exitItem = new JMenuItem(EXIT_ITEM);
         exitItem.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {

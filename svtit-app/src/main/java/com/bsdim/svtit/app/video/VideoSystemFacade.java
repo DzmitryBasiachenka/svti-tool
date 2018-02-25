@@ -15,4 +15,12 @@ public class VideoSystemFacade {
     public List<VideoSystem> getVideoSystems() {
         return service.getVideoSystems();
     }
+
+    public void updateVideoSystem(VideoSystem videoSystem) {
+        service.updateVideoSystem(videoSystem);
+    }
+
+    public void deleteVideoSystem(String name) {
+        service.deleteVideoSystem(name);
+    }
 }

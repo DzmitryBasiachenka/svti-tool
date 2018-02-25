@@ -59,7 +59,7 @@ public class MainMenu {
                     String videoSystemName = InputUtil.inputData(ENTER_NAME);
                     videoSystem = service.findByName(videoSystemName);
                     if (videoSystem != null) {
-                        service.delete(videoSystemName);
+                        service.deleteVideoSystem(videoSystemName);
                     } else {
                         sLogger.info(VIDEO_SYSTEM_NOT_FOUND);
                     }

@@ -17,12 +17,12 @@ import org.codehaus.plexus.util.StringUtils;
 public class VideoSystemWindow extends JFrame {
     private static final String VIDEO_SYSTEM = "Система видеонаблюдения";
     private static final String DATA_BORDER = "Данные";
-    private static final String NAME_OBJECT = "Название объекта: ";
-    private static final String DATE = "Дата ввода в эксплуатацию: ";
+    private static final String NAME_STATION = "Название станции: ";
+    private static final String DATE_OF_FOUNDATION = "Дата ввода в эксплуатацию: ";
     private static final String DATE_EXAMPLE = "пример: 31.12.2017";
     private static final String MODEL_OF_VIDEO_RECORDER = "Модель видеорегистратора: ";
     private static final String IP_OF_VIDEO_RECORDER = "IPv4-адрес видеорегистратора: ";
-    private static final String ARCHIVE = "Архив(количество дней, хранимой информации)";
+    private static final String ARCHIVE = "Архив(количество дней, хранимой информации):";
     private static final String ARCHIVE_SUMMER = "Лето: ";
     private static final String ARCHIVE_WINTER = "Зима: ";
     private static final String ARCHIVE_EXAMPLE = "пример: 30 суток";
@@ -39,9 +39,9 @@ public class VideoSystemWindow extends JFrame {
     private static final int HEIGHT = 600;
 
     private Box mainBox;
-    private JTextField nameField;
-    private JTextField dateField;
-    private JTextField videoRecorderField;
+    private JTextField nameStationField;
+    private JTextField dateOfFoundationField;
+    private JTextField modelVideoRecorderField;
     private JTextField summerArchiveField;
     private JTextField winterArchiveField;
     private JTextField ipOfVideoRecorderField;
@@ -108,36 +108,36 @@ public class VideoSystemWindow extends JFrame {
 
     private Box initNameComponent() {
         Box nameBox = Box.createHorizontalBox();
-        JLabel nameLabel = new JLabel(NAME_OBJECT);
-        nameField = initTextField();
-        nameField.setDocument(new LengthRestrictedDocument(64));
+        JLabel nameLabel = new JLabel(NAME_STATION);
+        nameStationField = initTextField();
+        nameStationField.setDocument(new LengthRestrictedDocument(64));
 
         nameBox.add(nameLabel);
         nameBox.add(Box.createHorizontalStrut(75));
-        nameBox.add(nameField);
+        nameBox.add(nameStationField);
         return nameBox;
     }
 
     private Box initDateComponent() {
         Box dateBox = Box.createHorizontalBox();
-        JLabel nameLabel = new JLabel(DATE);
-        dateField = initTextField();
-        dateField.setToolTipText(DATE_EXAMPLE);
+        JLabel nameLabel = new JLabel(DATE_OF_FOUNDATION);
+        dateOfFoundationField = initTextField();
+        dateOfFoundationField.setToolTipText(DATE_EXAMPLE);
 
         dateBox.add(nameLabel);
         dateBox.add(Box.createHorizontalStrut(18));
-        dateBox.add(dateField);
+        dateBox.add(dateOfFoundationField);
         return dateBox;
     }
 
     private Box initVideoRecorderComponent() {
         Box videoBox = Box.createHorizontalBox();
         JLabel nameLabel = new JLabel(MODEL_OF_VIDEO_RECORDER);
-        videoRecorderField = initTextField();
+        modelVideoRecorderField = initTextField();
 
         videoBox.add(nameLabel);
         videoBox.add(Box.createHorizontalStrut(18));
-        videoBox.add(videoRecorderField);
+        videoBox.add(modelVideoRecorderField);
         return videoBox;
     }
 
@@ -261,18 +261,18 @@ public class VideoSystemWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 VideoSystemFacade facade = new VideoSystemFacade();
-                if (StringUtils.isBlank(nameField.getText())) {
+                if (StringUtils.isBlank(nameStationField.getText())) {
                     JOptionPane.showMessageDialog(null,
-                            String.format("Поле \"Название объекта\" заполнено некорректно"));
+                            String.format("Поле \"Название станции\" заполнено некорректно"));
                 } else {
-                    VideoSystem videoSystem = facade.findByName(nameField.getText());
+                    VideoSystem videoSystem = facade.findByName(nameStationField.getText());
                     if (videoSystem == null) {
                         saveVideoSystem();
                         JOptionPane.showMessageDialog(null, String.format("Сохранено"));
                         dispose();
                     } else {
                         JOptionPane.showMessageDialog(null,
-                                String.format("Объект %1$s уже существует", nameField.getText()));
+                                String.format("Станция %1$s уже существует", nameStationField.getText()));
                     }
                 }
             }
@@ -302,9 +302,9 @@ public class VideoSystemWindow extends JFrame {
         VideoSystem videoSystem = new VideoSystem();
 
         videoSystem.setId(UUID.randomUUID().toString());
-        videoSystem.setNameObject(nameField.getText());
-        videoSystem.setDateOfFoundation(dateField.getText());
-        videoSystem.setModelOfVideoRecorder(videoRecorderField.getText());
+        videoSystem.setNameStation(nameStationField.getText());
+        videoSystem.setDateOfFoundation(dateOfFoundationField.getText());
+        videoSystem.setModelOfVideoRecorder(modelVideoRecorderField.getText());
         videoSystem.setSummerArchive(summerArchiveField.getText());
         videoSystem.setWinterArchive(winterArchiveField.getText());
         videoSystem.setIpOfVideoRecorder(ipOfVideoRecorderField.getText());

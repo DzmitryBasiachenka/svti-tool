@@ -43,7 +43,7 @@ public final class InputUtil {
         String passwordOfCameras = inputData("Enter password of the cameras: ");
 
         videoSystem.setId(UUID.randomUUID().toString());
-        videoSystem.setNameObject(name);
+        videoSystem.setNameStation(name);
         videoSystem.setDateOfFoundation(dateOfFoundation);
         videoSystem.setModelOfVideoRecorder(modelOfVideoRecorder);
         videoSystem.setIpOfVideoRecorder(ipOfVideoRecorder);

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class VideoSystem implements Serializable {
     private String id;
-    private String nameObject;
+    private String nameStation;
     private String dateOfFoundation;
     private String modelOfVideoRecorder;
     private String ipOfVideoRecorder;
@@ -26,12 +26,12 @@ public class VideoSystem implements Serializable {
         this.id = id;
     }
 
-    public String getNameObject() {
-        return nameObject;
+    public String getNameStation() {
+        return nameStation;
     }
 
-    public void setNameObject(String nameObject) {
-        this.nameObject = nameObject;
+    public void setNameStation(String nameStation) {
+        this.nameStation = nameStation;
     }
 
     public String getDateOfFoundation() {
@@ -132,11 +132,8 @@ public class VideoSystem implements Serializable {
 
     @Override
     public String toString() {
-        return new StringBuilder("id :")
-                .append(getId())
-                .append("\n\n")
-                .append("Название объекта: ")
-                .append(getNameObject())
+        return new StringBuilder("Название станции: ")
+                .append(getNameStation())
                 .append("\n\n")
                 .append("Дата ввода в эксплуатацию: ")
                 .append(getDateOfFoundation())

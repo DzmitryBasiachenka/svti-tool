@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public abstract class FileRepositoryAbstract<T> {
-    private static final String FILE_SAVED = "File save";
+    private static final String FILE_SAVED = "File saved";
     private static Logger sLogger = Logger.getLogger(FileRepositoryAbstract.class.getName());
     private String file;
 

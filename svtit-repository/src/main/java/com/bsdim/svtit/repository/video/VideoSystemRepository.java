@@ -24,7 +24,7 @@ public class VideoSystemRepository extends FileRepositoryAbstract<VideoSystem> i
     public VideoSystem read(String name) {
         List<VideoSystem> list = readData();
         for (VideoSystem videoSystem: list) {
-            if (videoSystem.getNameObject().equals(name)) {
+            if (videoSystem.getNameStation().equals(name)) {
                 return videoSystem;
             }
         }
@@ -36,7 +36,7 @@ public class VideoSystemRepository extends FileRepositoryAbstract<VideoSystem> i
         List<VideoSystem> list = readData();
         for (int i = 0; i < list.size(); i++) {
             VideoSystem videoSystemName = list.get(i);
-            if (videoSystemName.getNameObject().equals(videoSystem.getNameObject())) {
+            if (videoSystemName.getNameStation().equals(videoSystem.getNameStation())) {
                 list.set(i, videoSystem);
                 break;
             }
@@ -49,7 +49,7 @@ public class VideoSystemRepository extends FileRepositoryAbstract<VideoSystem> i
         List<VideoSystem> list = readData();
         for (int i = 0; i < list.size(); i++) {
             VideoSystem videoSystem = list.get(i);
-            if (videoSystem.getNameObject().equals(name)) {
+            if (videoSystem.getNameStation().equals(name)) {
                 list.remove(i);
                 break;
             }

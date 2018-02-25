@@ -20,7 +20,7 @@ public class VideoSystemService {
         repository.update(videoSystem);
     }
 
-    public void delete(String name) {
+    public void deleteVideoSystem(String name) {
         repository.delete(name);
     }
 
