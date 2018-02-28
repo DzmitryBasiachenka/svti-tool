@@ -20,7 +20,7 @@ public class MainMenu {
     private static final String UPDATE_VIDEO_SYSTEM = "Update video system";
     private static final String DELETE_VIDEO_SYSTEM = "Delete video system";
     private static final String DISPLAY_VIDEO_SYSTEMS = "Display all video systems";
-    private static final String ENTER_NAME = "Enter name of object";
+    private static final String ENTER_NAME = "Enter name of station";
     private static final String GOODBYE = "Goodbye";
     private static final String CHOOSE_AGAIN = "Choose again";
     private static Logger sLogger = Logger.getLogger(MainMenu.class.getName());

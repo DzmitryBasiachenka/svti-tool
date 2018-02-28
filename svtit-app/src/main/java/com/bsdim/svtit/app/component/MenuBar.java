@@ -7,8 +7,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import com.bsdim.svtit.app.window.EditorWindow;
-import com.bsdim.svtit.app.window.VideoSystemWindow;
+import com.bsdim.svtit.app.window.video.VideoSystemWindow;
 
 public class MenuBar {
     private static final String FILE_MENU = "Файл";

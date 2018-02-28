@@ -1,8 +1,20 @@
-package com.bsdim.svtit.app.window;
+package com.bsdim.svtit.app.window.video;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.bsdim.svtit.app.video.VideoSystemFacade;
@@ -27,6 +39,7 @@ public class EditorWindow extends JFrame {
     private static final String PASSWORD_OF_CAMERAS = "Пароль камер: ";
     private static final String SAVE_BUTTON = "Сохранить";
     private static final String CANCEL_BUTTON = "Отмена";
+    private static final String SAVED = "Сохранено";
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
 
@@ -163,7 +176,7 @@ public class EditorWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateVideoSystem();
-                JOptionPane.showMessageDialog(null, String.format("Сохранено"));
+                JOptionPane.showMessageDialog(null, String.format(SAVED));
                 dispose();
             }
         });

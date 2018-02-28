@@ -1,9 +1,28 @@
-package com.bsdim.svtit.app.window;
+package com.bsdim.svtit.app.window.video;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
-import javax.swing.*;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ListCellRenderer;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
@@ -20,6 +39,10 @@ public class WorkspaceWindow extends JFrame {
     private static final String DELETE_BUTTON = "Удалить";
     private static final String STATION = "Станция";
     private static final String INFORMATION = "Информация";
+    private static final String CHECK_STATION_TO_EDIT = "Выберите станцию для редактирования";
+    private static final String CHECK_STATION_TO_DELETE = "Выберите станцию для удаления";
+    private static final String DELETED = "Удалено";
+    private static final String EMPTY = "";
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
 
@@ -32,7 +55,7 @@ public class WorkspaceWindow extends JFrame {
 
     public WorkspaceWindow() {
         super(WORKSPACE_WINDOW);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
@@ -86,7 +109,7 @@ public class WorkspaceWindow extends JFrame {
                     });
                 } else {
                     JOptionPane.showMessageDialog(null,
-                            String.format("Выберите станцию для редактирования"));
+                            String.format(CHECK_STATION_TO_EDIT));
                 }
             }
         };
@@ -99,11 +122,11 @@ public class WorkspaceWindow extends JFrame {
                 if (videoSystem != null) {
                     facade.deleteVideoSystem(videoSystem.getNameStation());
                     JOptionPane.showMessageDialog(null,
-                            String.format("Удалено"));
+                            String.format(DELETED));
                     refreshData();
                 } else {
                     JOptionPane.showMessageDialog(null,
-                            String.format("Выберите станцию для удаления"));
+                            String.format(CHECK_STATION_TO_DELETE));
                 }
             }
         };
@@ -163,7 +186,7 @@ public class WorkspaceWindow extends JFrame {
         }
         listNames.setModel(listModel);
         listNames.setCellRenderer(new VideoSystemCellRenderer());
-        info.setText("");
+        info.setText(EMPTY);
     }
 
     private final class VideoSystemCellRenderer extends JLabel implements ListCellRenderer {
