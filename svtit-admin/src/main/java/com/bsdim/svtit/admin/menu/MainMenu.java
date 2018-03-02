@@ -1,11 +1,12 @@
 package com.bsdim.svtit.admin.menu;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import com.bsdim.svtit.admin.util.InputUtil;
 import com.bsdim.svtit.domain.video.VideoSystem;
 import com.bsdim.svtit.service.video.VideoSystemService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MainMenu {
     private static final int CASE_ONE = 1;
@@ -23,7 +24,8 @@ public class MainMenu {
     private static final String ENTER_NAME = "Enter name of station";
     private static final String GOODBYE = "Goodbye";
     private static final String CHOOSE_AGAIN = "Choose again";
-    private static Logger sLogger = Logger.getLogger(MainMenu.class.getName());
+    private static Logger sLogger = LoggerFactory.getLogger(MainMenu.class);
+
     private VideoSystemService service = new VideoSystemService();
 
     public void selectMenu() {

@@ -19,7 +19,7 @@ import com.bsdim.svtit.app.window.video.WorkspaceWindow;
 public class MainWindow extends JFrame {
     private static final String MAIN_WINDOW = "Главное окно";
     private static final String IN_PROGRESS = "In progress...";
-    private static final String PATH_VIDEO_ICON_PNG = "icons/videoIcon.png";
+    private static final String VIDEO_ICON_PNG = "icons/videoIcon.png";
     private static final String VIDEO_CONTROL = "<html><font size=4>Видеонаблюдение</font></html>";
     private static final int WIDTH = 400;
     private static final int HEIGHT = 400;
@@ -48,7 +48,7 @@ public class MainWindow extends JFrame {
 
     private JComponent initButtonComponent() {
         JButton video = new JButton(VIDEO_CONTROL);
-        video.setIcon(new ImageIcon(PATH_VIDEO_ICON_PNG));
+        video.setIcon(new ImageIcon(VIDEO_ICON_PNG));
         video.setVerticalTextPosition(SwingConstants.BOTTOM);
         video.setHorizontalTextPosition(SwingConstants.CENTER);
         video.setIconTextGap(-20);
@@ -56,6 +56,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new WorkspaceWindow();
+                dispose();
             }
         });
         return video;
