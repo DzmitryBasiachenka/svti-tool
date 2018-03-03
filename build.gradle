@@ -3,6 +3,13 @@ compileJava.options.encoding = 'UTF-8'
 
 subprojects {
   apply plugin: 'java'
+  apply plugin: 'checkstyle'
+
+checkstyle {
+  ignoreFailures = true
+  toolVersion = 8.4
+  configFile = new File("$rootDir/config/checkstyle.xml")
+ }
 
 repositories {
   jcenter()
@@ -16,6 +23,6 @@ dependencies {
  }
 
 tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
+    options.encoding = 'UTF-8'
  }
 }

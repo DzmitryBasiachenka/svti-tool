@@ -1,14 +1,17 @@
 package com.bsdim.svtit.app.component;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.AbstractAction;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import com.bsdim.svtit.app.window.video.VideoSystemWindow;
-
+/**
+ * The menu bar.
+ * <p>
+ * Date: 2018-03-03
+ *
+ * @author Dzmitry Basiachenka
+ */
 public class MenuBar {
     private static final String FILE_MENU = "Файл";
     private static final String NEW_ITEM = "Новый";
@@ -18,12 +21,26 @@ public class MenuBar {
     private static final String HELP_MENU = "Помощь";
     private static final String ABOUT_ITEM = "О программме";
 
-    private ActionListener editActionListener;
-    private ActionListener deleteActionListener;
+    private ActionListener createItemActionListener;
+    private ActionListener editItemActionListener;
+    private ActionListener deleteItemActionListener;
+    private ActionListener exitItemActionListener;
 
-    public JMenuBar initMenuBarComponent(ActionListener editActionListener, ActionListener deleteActionListener) {
-        this.editActionListener = editActionListener;
-        this.deleteActionListener = deleteActionListener;
+    /**
+     * Parametrized constructor.
+     *
+     * @param createActionListener the create action listener.
+     * @param editActionListener the edit action listener.
+     * @param deleteActionListener the delete action listener.
+     * @param exitActionListener the exit action listener.
+     * @return the menu bar.
+     */
+    public JMenuBar initMenuBarComponent(ActionListener createActionListener, ActionListener editActionListener,
+                                         ActionListener deleteActionListener, ActionListener exitActionListener) {
+        this.createItemActionListener = createActionListener;
+        this.editItemActionListener = editActionListener;
+        this.deleteItemActionListener = deleteActionListener;
+        this.exitItemActionListener = exitActionListener;
 
         JMenuBar menuBar = new JMenuBar();
 
@@ -37,26 +54,16 @@ public class MenuBar {
         JMenu menu = new JMenu(FILE_MENU);
 
         JMenuItem newItem = new JMenuItem(NEW_ITEM);
-        newItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new VideoSystemWindow();
-            }
-        });
+        newItem.addActionListener(createItemActionListener);
 
         JMenuItem editItem = new JMenuItem(EDIT_ITEM);
-        editItem.addActionListener(editActionListener);
+        editItem.addActionListener(editItemActionListener);
 
         JMenuItem deleteItem = new JMenuItem(DELETE_ITEM);
-        deleteItem.addActionListener(deleteActionListener);
+        deleteItem.addActionListener(deleteItemActionListener);
 
         JMenuItem exitItem = new JMenuItem(EXIT_ITEM);
-        exitItem.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        exitItem.addActionListener(exitItemActionListener);
 
         menu.add(newItem);
         menu.add(editItem);

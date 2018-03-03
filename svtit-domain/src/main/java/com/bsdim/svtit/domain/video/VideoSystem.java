@@ -2,16 +2,25 @@ package com.bsdim.svtit.domain.video;
 
 import java.io.Serializable;
 
+/**
+ * The video system.
+ * <p>
+ * Date: 2018-03-03
+ *
+ * @author Dzmitry Basiachenka
+ */
 public class VideoSystem implements Serializable {
+    private static final String DOUBLE_LINE_FEED = "\n\n";
+
     private String id;
     private String nameStation;
     private String dateOfFoundation;
-    private String modelOfVideoRecorder;
-    private String ipOfVideoRecorder;
+    private String modelOfDVR;
+    private String ipOfDVR;
     private String summerArchive;
     private String winterArchive;
-    private String loginOfVideoRecorder;
-    private String passwordOfVideoRecorder;
+    private String loginOfDVR;
+    private String passwordOfDVR;
     private String countOfCameras;
     private String modelsOfCameras;
     private String ipOfCameras;
@@ -42,20 +51,20 @@ public class VideoSystem implements Serializable {
         this.dateOfFoundation = dateOfFoundation;
     }
 
-    public String getModelOfVideoRecorder() {
-        return modelOfVideoRecorder;
+    public String getModelOfDVR() {
+        return modelOfDVR;
     }
 
-    public void setModelOfVideoRecorder(String modelOfVideoRecorder) {
-        this.modelOfVideoRecorder = modelOfVideoRecorder;
+    public void setModelOfDVR(String modelOfDVR) {
+        this.modelOfDVR = modelOfDVR;
     }
 
-    public String getIpOfVideoRecorder() {
-        return ipOfVideoRecorder;
+    public String getIpOfDVR() {
+        return ipOfDVR;
     }
 
-    public void setIpOfVideoRecorder(String ipOfVideoRecorder) {
-        this.ipOfVideoRecorder = ipOfVideoRecorder;
+    public void setIpOfDVR(String ipOfDVR) {
+        this.ipOfDVR = ipOfDVR;
     }
 
     public String getSummerArchive() {
@@ -74,20 +83,20 @@ public class VideoSystem implements Serializable {
         this.winterArchive = winterArchive;
     }
 
-    public String getLoginOfVideoRecorder() {
-        return loginOfVideoRecorder;
+    public String getLoginOfDVR() {
+        return loginOfDVR;
     }
 
-    public void setLoginOfVideoRecorder(String loginOfVideoRecorder) {
-        this.loginOfVideoRecorder = loginOfVideoRecorder;
+    public void setLoginOfDVR(String loginOfDVR) {
+        this.loginOfDVR = loginOfDVR;
     }
 
-    public String getPasswordOfVideoRecorder() {
-        return passwordOfVideoRecorder;
+    public String getPasswordOfDVR() {
+        return passwordOfDVR;
     }
 
-    public void setPasswordOfVideoRecorder(String passwordOfVideoRecorder) {
-        this.passwordOfVideoRecorder = passwordOfVideoRecorder;
+    public void setPasswordOfDVR(String passwordOfDVR) {
+        this.passwordOfDVR = passwordOfDVR;
     }
 
     public String getCountOfCameras() {
@@ -134,40 +143,40 @@ public class VideoSystem implements Serializable {
     public String toString() {
         return new StringBuilder("Название станции: ")
                 .append(getNameStation())
-                .append("\n\n")
+                .append(DOUBLE_LINE_FEED)
                 .append("Дата ввода в эксплуатацию: ")
                 .append(getDateOfFoundation())
-                .append("\n\n")
+                .append(DOUBLE_LINE_FEED)
                 .append("Модель видеорегистратора: ")
-                .append(getModelOfVideoRecorder())
-                .append("\n\n")
+                .append(getModelOfDVR())
+                .append(DOUBLE_LINE_FEED)
                 .append("IPv4-адрес видеорегистратора: ")
-                .append(getIpOfVideoRecorder())
-                .append("\n\n")
+                .append(getIpOfDVR())
+                .append(DOUBLE_LINE_FEED)
                 .append("Архив лето: ")
                 .append(getSummerArchive())
-                .append("\n\n")
+                .append(DOUBLE_LINE_FEED)
                 .append("Архив зима: ")
                 .append(getWinterArchive())
-                .append("\n\n")
+                .append(DOUBLE_LINE_FEED)
                 .append("Логин видеорегистратора: ")
-                .append(getLoginOfVideoRecorder())
-                .append("\n\n")
+                .append(getLoginOfDVR())
+                .append(DOUBLE_LINE_FEED)
                 .append("Пароль видеорегистратора: ")
-                .append(getPasswordOfVideoRecorder())
-                .append("\n\n")
+                .append(getPasswordOfDVR())
+                .append(DOUBLE_LINE_FEED)
                 .append("Количество камер: ")
                 .append(getCountOfCameras())
-                .append("\n\n")
+                .append(DOUBLE_LINE_FEED)
                 .append("Список моделей камер: ")
                 .append(getModelsOfCameras())
-                .append("\n\n")
+                .append(DOUBLE_LINE_FEED)
                 .append("IPv4-адреса камер: ")
                 .append(getIpOfCameras())
-                .append("\n\n")
+                .append(DOUBLE_LINE_FEED)
                 .append("Логин камер: ")
                 .append(getLoginOfCameras())
-                .append("\n\n")
+                .append(DOUBLE_LINE_FEED)
                 .append("Пароль камер: ")
                 .append(getPasswordOfCameras()).toString();
     }

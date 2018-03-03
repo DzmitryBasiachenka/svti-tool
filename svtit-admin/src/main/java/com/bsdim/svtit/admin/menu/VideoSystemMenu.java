@@ -2,6 +2,13 @@ package com.bsdim.svtit.admin.menu;
 
 import java.util.logging.Logger;
 
+/**
+ * The video system menu.
+ * <p>
+ * Date: 2018-03-03
+ *
+ * @author Dzmitry Basiachenka
+ */
 public class VideoSystemMenu extends AbstractMenu {
     private static final String SELECT_ITEM = "Select a menu item";
     private static final String ADD_VIDEO_SYSTEM = "1)Add video system";

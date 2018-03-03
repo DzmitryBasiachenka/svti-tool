@@ -9,16 +9,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public abstract class FileRepositoryAbstract<T> {
+/**
+ * The abstract file repository.
+ *
+ * <p>
+ * Date: 2018-03-03
+ *
+ * @author Dzmitry Basiachenka
+ *
+ * @param <T>
+ */
+public abstract class AbstractFileRepository<T> {
     private static final String FILE_SAVED = "File saved";
-    private static Logger sLogger = Logger.getLogger(FileRepositoryAbstract.class.getName());
+    private static Logger sLogger = Logger.getLogger(AbstractFileRepository.class.getName());
 
     private String file;
 
-    public FileRepositoryAbstract(String newFile) {
+    /**
+     * Parametrized constructor.
+     *
+     * @param newFile the new file.
+     */
+    public AbstractFileRepository(String newFile) {
         this.file = newFile;
     }
 
+    /**
+     * Writes data to the file.
+     *
+     * @param list the list of data.
+     */
     public void writeData(List<T> list) {
         try (ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(file))) {
             write.writeObject(list);
@@ -28,6 +48,11 @@ public abstract class FileRepositoryAbstract<T> {
         }
     }
 
+    /**
+     * Reads data from the file.
+     *
+     * @return the list of data.
+     */
     public List<T> readData() {
         if (new File(file).exists()) {
             try (ObjectInputStream read = new ObjectInputStream(new FileInputStream(file))) {

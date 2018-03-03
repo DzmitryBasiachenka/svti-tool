@@ -8,6 +8,13 @@ import com.bsdim.svtit.service.video.VideoSystemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Represents main menu.
+ * <p>
+ * Date: 2018-03-03
+ *
+ * @author Dzmitry Basiachenka
+ */
 public class MainMenu {
     private static final int CASE_ONE = 1;
     private static final int CASE_TWO = 2;
@@ -28,6 +35,10 @@ public class MainMenu {
 
     private VideoSystemService service = new VideoSystemService();
 
+    /**
+     * Selects item of the main menu.
+     */
+    @SuppressWarnings("checkstyle:CyclomaticComplexity")
     public void selectMenu() {
         AbstractMenu userMenu = new VideoSystemMenu();
 

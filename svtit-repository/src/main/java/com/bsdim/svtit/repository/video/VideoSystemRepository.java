@@ -4,12 +4,21 @@ import java.util.List;
 
 import com.bsdim.svtit.domain.video.VideoSystem;
 import com.bsdim.svtit.repository.ICrud;
-import com.bsdim.svtit.repository.file.FileRepositoryAbstract;
+import com.bsdim.svtit.repository.file.AbstractFileRepository;
 
-
-public class VideoSystemRepository extends FileRepositoryAbstract<VideoSystem> implements ICrud<String, VideoSystem> {
+/**
+ * The video system repository.
+ * <p>
+ * Date: 2018-03-03
+ *
+ * @author Dzmitry Basiachenka
+ */
+public class VideoSystemRepository extends AbstractFileRepository<VideoSystem> implements ICrud<String, VideoSystem> {
     private static final String VIDEO_SYSTEM_DAT = "videoSystem.dat";
 
+    /**
+     * The constructor.
+     */
     public VideoSystemRepository() {
         super(VIDEO_SYSTEM_DAT);
     }
